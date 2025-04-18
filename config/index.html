@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        /* The grid container */
+        .grid-container {
+            display: grid;
+            grid-template-areas:
+    'left left left right right right';
+            /* grid-column-gap: 10px; - if you want gap between the columns */
+        }
+
+        .left,
+        .right {
+            padding: 10px;
+        }
+
+        /* Style the left column */
+        .left {
+            grid-area: left;
+        }
+
+        /* Style the right column */
+        .right {
+            grid-area: right;
+        }
+
+        /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+        @media (max-width: 600px) {
+            .grid-container  {
+                grid-template-areas:
+      'left left left left left left'
+      'right right right right right right'
+            }
+        }
+        #jsoneditor {
+            height: 100vh;
+        }
+        #jsoneditorright {
+            height: 100vh;
+        }
+        #version{
+            display: flex;
+            flex-direction: row;
+            padding: 10px;
+            font-size: 12px;
+        }
+        #versionseletor{
+            display: flex;
+            flex-direction: row;
+            padding: 10px;
+            font-size: 12px;
+        }
+        #keyselector{
+            display: flex;
+            flex-direction: row;
+            padding: 10px;
+            font-size: 12px;
+        }
+
+    </style>
+    <meta charset="utf-8">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/10.1.2/jsoneditor.min.css" rel="stylesheet" type="text/css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/10.1.2/jsoneditor.min.js"></script>
+
+    <script type="text/javascript" src="/config/js/config.js"></script>
+    <title>Config Center</title>
+</head>
+<body>
+
+<div class=cell>
+    <div><a class=home href='/home'>home</a></div>
+</div>
+<div class=cell>
+    <div><a class=home href='/home/config'>environments</a></div>
+</div>
+<div style='text-align:left'>
+    <h1>Config Center</h1>
+    <h2>{{.Env}}</h2>
+    <style>.cell { display: inline-block; width: 100em; }</style>
+</div>
+
+<div class="grid-container">
+
+    <div class="left" style="background-color:#aaa;" id="left">
+        <div id="version"></div>
+        <div id="versionseletor"></div>
+
+        <div id="jsoneditor"></div>
+        <script type="text/javascript">
+            let golangVar0 = "{{.JsonStr}}"
+            let golangVar1 = "{{.CurIndex}}"
+            let golangVar2 = "{{.Env}}"
+            let golangVar3 = "{{.Host}}"
+            process(golangVar0, golangVar1, golangVar2, golangVar3)
+        </script>
+    </div>
+
+
+    <div class="right" style="background-color:#ccc;" id="right">
+        <div id="keyselector"></div>
+        <div id="jsoneditorright"></div>
+        <script type="text/javascript">
+            processRight(golangVar0, golangVar1, golangVar2, golangVar3)
+        </script>
+    </div>
+
+</div>
+
+</body>
+</html>
+
+

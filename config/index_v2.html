@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        /* The grid container */
+        .grid-container {
+            display: grid;
+            grid-template-areas:
+    'left left mid mid right right';
+            /* grid-column-gap: 10px; - if you want gap between the columns */
+        }
+
+        .left,
+        .mid,
+        .right {
+            padding: 10px;
+        }
+
+        /* Style the left column */
+        .left {
+            grid-area: left;
+        }
+
+        .mid {
+            grid-area: mid;
+        }
+
+        /* Style the right column */
+        .right {
+            grid-area: right;
+        }
+
+        /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+        @media (max-width: 600px) {
+            .grid-container  {
+                grid-template-areas:
+      'left left left left left left'
+      'mid mid mid mid mid mid'
+      'right right right right right right'
+            }
+        }
+        #jsoneditorleft {
+            height: 100vh;
+        }
+        #jsoneditormid {
+            height: 100vh;
+        }
+        #jsoneditorright {
+            height: 100vh;
+        }
+        #version{
+            display: flex;
+            flex-direction: row;
+            padding: 10px;
+            font-size: 12px;
+        }
+        #versionseletor{
+            display: flex;
+            flex-direction: row;
+            padding: 10px;
+            font-size: 12px;
+        }
+        #keyselector{
+            display: flex;
+            flex-direction: row;
+            padding: 10px;
+            font-size: 12px;
+        }
+
+    </style>
+    <meta charset="utf-8">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/10.1.2/jsoneditor.min.css" rel="stylesheet" type="text/css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/10.1.2/jsoneditor.min.js"></script>
+
+    <script type="text/javascript" src="/config/js/config_v2.js"></script>
+    <title>Config Center V2</title>
+</head>
+<body>
+
+<div class=cell>
+    <div><a class=home href='/home'>home</a></div>
+</div>
+<div class=cell>
+    <div><a class=home href='/home/config_v2'>environments</a></div>
+</div>
+<div style='text-align:left'>
+    <h1>Config Center V2</h1>
+    <h2>{{.Env}}</h2>
+    <style>.cell { display: inline-block; width: 100em; }</style>
+</div>
+
+<div class="grid-container">
+
+    <div class="left" style="background-color:#aaa;" id="left">
+        <div id="versionleft"></div>
+        <div id="jsoneditorleft"></div>
+        <script type="text/javascript">
+            let golangVar0 = "{{.ShowJsonStr}}"
+            let golangVar1 = "{{.OverallIndex}}"
+            let golangVar2 = "{{.Env}}"
+            let golangVar3 = "{{.RealJsonStr}}"
+            let golangVar4 = "{{.Host}}"
+            processLeft(golangVar0, golangVar1, golangVar2, golangVar3, golangVar4)
+        </script>
+    </div>
+
+    <div class="mid" style="background-color:#bbb;" id="mid">
+        <div id="namespacemid"></div>
+        <div id="versionmid"></div>
+        <div id="versionseletormid"></div>
+
+        <div id="jsoneditormid"></div>
+        <script type="text/javascript">
+            processMid(golangVar0, golangVar1, golangVar2, golangVar4)
+        </script>
+    </div>
+
+
+    <div class="right" style="background-color:#ccc;" id="right">
+        <div id="keyselector"></div>
+        <div id="jsoneditorright"></div>
+        <script type="text/javascript">
+            processRight(golangVar0, golangVar1, golangVar2, golangVar4)
+        </script>
+    </div>
+
+</div>
+
+</body>
+</html>
+
+
